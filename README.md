@@ -2,7 +2,7 @@
 
 git init
 
-git remote add origin <URL>
+git remote add origin git URL
 
 git add .
 
