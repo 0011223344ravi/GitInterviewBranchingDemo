@@ -57,4 +57,45 @@ public class TestController1 {
         }
     }
 }
+................................................................................
+
+
+
+
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+public class YourService {
+
+    private final RestTemplate restTemplate;
+
+    public YourService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    public void callThirdPartyAPI() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Encoding", "gzip"); // Set your desired encoding here
+
+        // You can also set other headers if needed
+        // headers.set("Accept", "application/json");
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(
+            "https://third-party-api.com/endpoint",
+            HttpMethod.GET, // Change to your desired HTTP method
+            requestEntity,
+            String.class
+        );
+
+        // Process the response as needed
+        String responseBody = responseEntity.getBody();
+        // Handle the response...
+    }
+}
 
